@@ -37,36 +37,21 @@ canvas.grid(column=0, row=0, sticky=(N, W, E, S))
 root.geometry("400x400")
 
 img= ImageTk.PhotoImage(Image.open("piece.png"))
-
-canvas.create_image(25,16,anchor=NW,image=img)
-
-canvas.create_image(342,15,anchor=NW,image=img)
-
-canvas.create_image(95,195,anchor=NW,image=img)
-
+my_img = canvas.create_image(220,100,image=img)
 img2= ImageTk.PhotoImage(Image.open("piece2.png"))
-
+my_img2 = canvas.create_image(220,100,image=img)
+canvas.create_image(345,140,anchor=NW,image=img)
 canvas.create_image(345,140,anchor=NW,image=img2)
 
-def left (event):
-    x = 10
-    y = 0
-    canvas.move(img,x,y)
-def up (event):
-    x = 0
-    y = 10
-    canvas.move(img,x,y)
-def right (event):
-    x = 10
-    y = 0
-    canvas.move(img,x,y)
-def up (event):
-    x = 0
-    y = 10
-    canvas.move(img,x,y)
-
 def move(e):
+    global img
+    img= ImageTk.PhotoImage(Image.open("piece.png"))
+    my_img = canvas.create_image(e.x,e.y,image=img)
+    img2= ImageTk.PhotoImage(Image.open("piece2.png"))
+    my_img2 = canvas.create_image(e.x,e.y,image=img2)
 
-my_label = Label (root, text="")
-canvas.bind('<B1-Motion>', move)
+    #canvas.create_image(342,15,anchor=NW,image=img)
+    #canvas.create_image(95,195,anchor=NW,image=img)
+
+canvas.bind('<B1-Motion>',move)
 root.mainloop()
