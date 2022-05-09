@@ -1,4 +1,5 @@
 from tkinter import *
+from PIL import Image,ImageTk
 
 root = Tk()
 root.title("Nine men's morris")
@@ -34,4 +35,34 @@ canvas.create_line(189, 265, 189,200, fill='#332', width=3)
 #canvas.itemconfigure(id, fill='red', width=2)
 canvas.grid(column=0, row=0, sticky=(N, W, E, S))
 root.geometry("400x400")
+
+img= ImageTk.PhotoImage(Image.open("piece.png"))
+
+canvas.create_image(25,16,anchor=NW,image=img)
+
+canvas.create_image(342,15,anchor=NW,image=img)
+
+canvas.create_image(95,195,anchor=NW,image=img)
+
+img2= ImageTk.PhotoImage(Image.open("piece2.png"))
+
+canvas.create_image(345,140,anchor=NW,image=img2)
+
+def left (event):
+    x = 10
+    y = 0
+    canvas.move(img,x,y)
+def up (event):
+    x = 0
+    y = 10
+    canvas.move(img,x,y)
+def lef (event):
+    x = 10
+    y = 0
+    canvas.move(img,x,y)
+def up (event):
+    x = 0
+    y = 10
+    canvas.move(img,x,y)
+
 root.mainloop()
