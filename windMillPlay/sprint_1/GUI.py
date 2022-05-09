@@ -56,7 +56,7 @@ def up (event):
     x = 0
     y = 10
     canvas.move(img,x,y)
-def lef (event):
+def right (event):
     x = 10
     y = 0
     canvas.move(img,x,y)
@@ -65,4 +65,8 @@ def up (event):
     y = 10
     canvas.move(img,x,y)
 
+def move(e):
+
+my_label = Label (root, text="")
+canvas.bind('<B1-Motion>', move)
 root.mainloop()
