@@ -1,6 +1,6 @@
 from tkinter import *
 
-class Milis:
+class WindMillPlay:
     def __init__(self):
         self.window = Tk()
         self.window.title('milis')
@@ -59,7 +59,7 @@ class Milis:
             if(self.count>16):
                 self.cambia=True
                 self.window.bind('<Button-1>',self.cambiaTurno)
-                self.a = PhotoImage(file="piece.png")
+                self.a = PhotoImage(file="piece2.png")
                 self.canvas.create_image(e.x,e.y,image=self.a)
                 self.a.name = self.a.name+"1"
 
@@ -74,5 +74,5 @@ class Milis:
         self.window.mainloop()
 
 
-milisInstance = Milis()
+milisInstance = WindMillPlay()
 milisInstance.mainloop()
