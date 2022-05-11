@@ -42,15 +42,12 @@ class WindMillPlay:
         # linea vertical 2
         self.canvas.create_line(189, 265, 189, 200, fill='#332', width=3)
         self.canvas.grid(column=0, row=0, sticky = "N, W, E, S")
-
+        self.lista = list()
         # controlador
 
         self.window.bind('<Button-1>', self.posicionandoFicha)
 
-        # self.window.bind('<Button-1>',self.cambiaTurno )
-
-
-    def cambiaTurno(self, e):
+    def moviendoFicha(self, e):
         if self.cambia:
             print(e.x, e.y)
         else:
@@ -58,15 +55,17 @@ class WindMillPlay:
 
     def posicionandoFicha(self, e):
         if self.cambia:
-            self.a = PhotoImage(file="piece.png")
-            self.canvas.create_image(e.x, e.y, image=self.a)
-            self.cambia = False
-            self.a.name = self.a.name + "1"
-            self.count += 1
+            if 270-4.83<e.x and e.x< 270+4.83 and e.y<82+4.83 and e.y>82 - 4.83:
+                self.a = PhotoImage(file="piece.png")
+                self.canvas.create_image(e.x, e.y, image=self.a)
+                self.cambia = False
+                self.a.name = self.a.name + "1"
+                self.count += 1
+                print(e)
         else:
             if self.count > 16:
                 self.cambia = True
-                self.window.bind('<Button-1>', self.cambiaTurno)
+                self.window.bind('<Button-1>', self.moviendoFicha)
                 self.a = PhotoImage(file="piece2.png")
                 self.canvas.create_image(e.x, e.y, image=self.a)
                 self.a.name = self.a.name + "1"
