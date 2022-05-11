@@ -1,11 +1,10 @@
 from tkinter import *
 from Data import *
 
-
 class WindMillPlay:
     def __init__(self):
         self.window = Tk()
-        self.window.title('milis')
+        self.window.title('windMillPlay')
         self.window.geometry("400x400")
         self.canvas = Canvas(self.window)
         self.cambia = True
@@ -41,7 +40,7 @@ class WindMillPlay:
 
         # linea vertical 2
         self.canvas.create_line(189, 265, 189, 200, fill='#332', width=3)
-        self.canvas.grid(column=0, row=0, sticky = "N, W, E, S")
+        self.canvas.grid(column=0, row=0, sticky="N, W, E, S")
         self.lista = list()
         # controlador
 
@@ -50,38 +49,40 @@ class WindMillPlay:
     def moviendoFicha(self, e):
         if self.cambia:
             print(e.x, e.y)
+            print("soy el blanco")
         else:
             print(e.x, e.y)
 
+
     def posicionandoFicha(self, e):
         if self.cambia:
-            if position_list[1].in_the_radio(e.x, e.y) and position_list[1].empty:
-                position_list[1].empty = False
-                self.a = PhotoImage(file="piece.png")
-                self.canvas.create_image(e.x, e.y, image=self.a)
-                self.cambia = False
-                self.a.name = self.a.name + "1"
-                self.count += 1
-                print(e)
+            for i in position_list:
+                if i.in_the_radio(e.x, e.y) and i.empty:
+                    i.empty = False
+                    self.a = PhotoImage(file="piece.png")
+                    self.canvas.create_image(e.x, e.y, image=self.a)
+                    self.cambia = False
+                    self.a.name = self.a.name + "1"
+                    self.count += 1
         else:
-            if self.count > 16:
-                self.cambia = True
-                self.window.bind('<Button-1>', self.moviendoFicha)
-                self.a = PhotoImage(file="piece2.png")
-                self.canvas.create_image(e.x, e.y, image=self.a)
-                self.a.name = self.a.name + "1"
-
-            else:
-                self.a = PhotoImage(file="piece2.png")
-                self.canvas.create_image(e.x, e.y, image=self.a)
-                self.cambia = True
-                self.a.name = self.a.name + "1"
-                self.count += 1
+            for i in position_list:
+                if i.in_the_radio(e.x, e.y) and i.empty:
+                    i.empty = False
+                    if self.count >= 16:
+                        self.cambia = True
+                        self.window.bind('<Button-1>', self.moviendoFicha)
+                        self.a = PhotoImage(file="piece2.png")
+                        self.canvas.create_image(e.x, e.y, image=self.a)
+                        self.a.name = self.a.name + "1"
+                    else:
+                        self.a = PhotoImage(file="piece2.png")
+                        self.canvas.create_image(e.x, e.y, image=self.a)
+                        self.cambia = True
+                        self.a.name = self.a.name + "1"
+                        self.count += 1
 
     def mainloop(self):
         self.window.mainloop()
-for i in position_list:
-    print(i.x," ", i.y)
 
 milisInstance = WindMillPlay()
 milisInstance.mainloop()

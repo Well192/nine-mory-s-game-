@@ -7,7 +7,7 @@ class Position:
         self.y = int(y)
 
     def in_the_radio(self,x ,y):
-        if np.sqrt((x-self.x)**2+(y-self.y)**2) < 4.83:
+        if np.sqrt((x-self.x)**2+(y-self.y)**2) < 5:
             return True
         return False
 
@@ -16,9 +16,9 @@ position_list.append(Position(30, 20))
 position_list.append(Position(190, 20))
 position_list.append(Position(350, 20))
 position_list.append(Position(350, 145))
-position_list.append(Position(350, 265))
-position_list.append(Position(190, 265))
-position_list.append(Position(30, 265))
+position_list.append(Position(340, 250))
+position_list.append(Position(185, 260))
+position_list.append(Position(30, 260))
 position_list.append(Position(30, 140))
 position_list.append(Position(60, 50))
 position_list.append(Position(315, 50))
