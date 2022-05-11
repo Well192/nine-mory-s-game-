@@ -1,5 +1,6 @@
 from tkinter import *
 from Data import *
+from Logic import *
 
 class WindMillPlay:
     def __init__(self):
@@ -40,45 +41,21 @@ class WindMillPlay:
         # linea vertical 2
         self.canvas.create_line(189, 265, 189, 200, fill='#332', width=3)
         self.canvas.grid(column=0, row=0, sticky="N, W, E, S")
+
         self.lista = list()
 
-        # controlador
-        self.window.bind('<Button-1>', self.posicionandoFicha)
+        self.window.bind('<Button-1>', self.start)
 
     def moviendoFicha(self, e):
         if self.change:
             print(e.x, e.y)
-            print("soy el blanco")
+            #print("soy el blanco")
         else:
             print(e.x, e.y)
 
+    def start(self,e):
+        posicionandoFicha(self,e)
 
-    def posicionandoFicha(self, e):
-        if self.change:
-            for i in position_list:
-                if i.in_the_radio(e.x, e.y) and i.empty:
-                    i.empty = False
-                    self.a = PhotoImage(file="piece.png")
-                    self.canvas.create_image(e.x, e.y, image=self.a)
-                    self.change = False
-                    self.a.name = self.a.name + "1"
-                    self.count += 1
-        else:
-            for i in position_list:
-                if i.in_the_radio(e.x, e.y) and i.empty:
-                    i.empty = False
-                    if self.count >= 16:
-                        self.change = True
-                        self.window.bind('<Button-1>', self.moviendoFicha)
-                        self.a = PhotoImage(file="piece2.png")
-                        self.canvas.create_image(e.x, e.y, image=self.a)
-                        self.a.name = self.a.name + "1"
-                    else:
-                        self.a = PhotoImage(file="piece2.png")
-                        self.canvas.create_image(e.x, e.y, image=self.a)
-                        self.change = True
-                        self.a.name = self.a.name + "1"
-                        self.count += 1
 
     def mainloop(self):
         self.window.mainloop()

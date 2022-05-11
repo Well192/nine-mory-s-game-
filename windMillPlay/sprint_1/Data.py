@@ -35,4 +35,6 @@ position_list.append(Position(275, 200))
 position_list.append(Position(190, 200))
 position_list.append(Position(100, 200))
 position_list.append(Position(100, 145))
+position_list.append(Position(186, 46))
+position_list.append(Position(343, 259))
 
