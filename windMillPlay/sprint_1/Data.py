@@ -1,19 +1,15 @@
+import numpy as np
+
 class Position:
     def __init__(self, x, y):
+        self.empty=True
         self.x = int(x)
         self.y = int(y)
 
-    def getX(self):
-        return self.x
-
-    def getY(self):
-        return self.y
-
-    def setX(self, x):
-        self.x = x
-
-    def setY(self, y):
-        self.y = y
+    def in_the_radio(self,x ,y):
+        if np.sqrt((x-self.x)**2+(y-self.y)**2) < 4.83:
+            return True
+        return False
 
 position_list=list()
 position_list.append(Position(30, 20))

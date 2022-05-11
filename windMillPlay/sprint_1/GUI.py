@@ -55,7 +55,8 @@ class WindMillPlay:
 
     def posicionandoFicha(self, e):
         if self.cambia:
-            if 270-4.83<e.x and e.x< 270+4.83 and e.y<82+4.83 and e.y>82 - 4.83:
+            if position_list[1].in_the_radio(e.x, e.y) and position_list[1].empty:
+                position_list[1].empty = False
                 self.a = PhotoImage(file="piece.png")
                 self.canvas.create_image(e.x, e.y, image=self.a)
                 self.cambia = False
@@ -79,7 +80,8 @@ class WindMillPlay:
 
     def mainloop(self):
         self.window.mainloop()
-
+for i in position_list:
+    print(i.x," ", i.y)
 
 milisInstance = WindMillPlay()
 milisInstance.mainloop()
