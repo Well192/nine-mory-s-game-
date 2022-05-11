@@ -7,8 +7,7 @@ class WindMillPlay:
         self.window.title('windMillPlay')
         self.window.geometry("400x400")
         self.canvas = Canvas(self.window)
-        self.cambia = True
-        self.controlador = True
+        self.change = True
         self.count = 0  # contador de fichas
 
         # primer cuadrado
@@ -42,12 +41,12 @@ class WindMillPlay:
         self.canvas.create_line(189, 265, 189, 200, fill='#332', width=3)
         self.canvas.grid(column=0, row=0, sticky="N, W, E, S")
         self.lista = list()
-        # controlador
 
+        # controlador
         self.window.bind('<Button-1>', self.posicionandoFicha)
 
     def moviendoFicha(self, e):
-        if self.cambia:
+        if self.change:
             print(e.x, e.y)
             print("soy el blanco")
         else:
@@ -55,13 +54,13 @@ class WindMillPlay:
 
 
     def posicionandoFicha(self, e):
-        if self.cambia:
+        if self.change:
             for i in position_list:
                 if i.in_the_radio(e.x, e.y) and i.empty:
                     i.empty = False
                     self.a = PhotoImage(file="piece.png")
                     self.canvas.create_image(e.x, e.y, image=self.a)
-                    self.cambia = False
+                    self.change = False
                     self.a.name = self.a.name + "1"
                     self.count += 1
         else:
@@ -69,7 +68,7 @@ class WindMillPlay:
                 if i.in_the_radio(e.x, e.y) and i.empty:
                     i.empty = False
                     if self.count >= 16:
-                        self.cambia = True
+                        self.change = True
                         self.window.bind('<Button-1>', self.moviendoFicha)
                         self.a = PhotoImage(file="piece2.png")
                         self.canvas.create_image(e.x, e.y, image=self.a)
@@ -77,7 +76,7 @@ class WindMillPlay:
                     else:
                         self.a = PhotoImage(file="piece2.png")
                         self.canvas.create_image(e.x, e.y, image=self.a)
-                        self.cambia = True
+                        self.change = True
                         self.a.name = self.a.name + "1"
                         self.count += 1
 
