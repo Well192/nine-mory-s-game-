@@ -1,12 +1,12 @@
-from unittest import TestCase
+import unittest
+from windMillPlay.sprint_1.production.GUI import WindMillPlay
 
 
-class TestWindMillPlay(TestCase):
-    def test_eliminando(self):
-        self.fail()
+class TestWindMillPlay(unittest.TestCase):
+    def test_create_board(self):
+        gameGUI = WindMillPlay()
+        self.assertEqual(True, gameGUI.state)
 
 
-class TestWindMillPlay(TestCase):
-    def test_moviendo_ficha(self):
-        self.fail()
-
+if __name__ == '__main__':
+    unittest.main()

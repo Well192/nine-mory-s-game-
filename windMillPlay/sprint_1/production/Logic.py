@@ -1,7 +1,5 @@
 from tkinter import *
 from Data import *
-from tkinter import *
-from Data import *
 
 
 class WindMillPlayGame:
@@ -19,7 +17,7 @@ class WindMillPlayGame:
                     object.change = False
                     object.a.name = object.a.name + "1"
                     object.count += 1
-                    print(object.count)
+
         else:
             for i in position_list:
                 if i.in_the_radio(event.x, event.y) and i.empty:
@@ -39,6 +37,6 @@ class WindMillPlayGame:
                         object.change = True
                         object.a.name = object.a.name + "1"
                         object.count += 1
-                    print(object.count)
+
 
 

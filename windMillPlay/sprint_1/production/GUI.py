@@ -3,12 +3,14 @@ from Data import *
 from Logic import *
 import numpy as np
 
+
 class WindMillPlay:
     def __init__(self):
         self.window = Tk()
         self.window.title('windMillPlay')
         self.window.geometry("400x400")
         self.canvas = Canvas(self.window)
+        self.state = True
         self.change = True
         self.count = 0  # contador de fichas
 
@@ -47,32 +49,47 @@ class WindMillPlay:
         self.deli = 0
         self.window.bind('<Button-1>', self.start)
 
-    def moviendoFicha(self, e):
+    def start(self,e):
+        game = WindMillPlayGame()
+        game.posicionandoFicha(self,e)
 
+    def moviendoFicha(self, e):
         if self.change:
             for i in self.lista:
                 if (np.sqrt((i[1]-e.x)**2 + (i[2]-e.y)**2) < 4) and (i[0]%2!=0):
-                    self.deli = i[0]
+                    self.position = i
                     self.window.bind("<Button-1>",self.eliminando)
                     self.change = False
         else:
             self.change = True
+
     def eliminando(self,e):
-        self.a = PhotoImage(file="piece.png")
-        self.id = self.canvas.create_image(e.x, e.y, image=self.a)
-        self.lista.append([self.id,e.x,e.y])
-        self.change = False
-        self.a.name = self.a.name + "1"
-        self.count += 1
-        self.canvas.delete(self.deli)
+        if self.validatePosition(e.x, e.y, self.position):
+            self.a = PhotoImage(file="piece.png")
+            self.id = self.canvas.create_image(e.x, e.y, image=self.a)
+            self.lista.append([self.id, e.x, e.y])
+            self.change = False
+            self.a.name = self.a.name + "1"
+            self.count += 1
 
+            self.canvas.delete(self.position[0])
+        else:
+            print("Movimiento inválido, seleccione otra posición")
 
-    def start(self,e):
-        posicionandoFicha(self,e)
-
+    def validatePosition(self, x, y, ficha):
+        flag = False
+        pos = Position(0,0)
+        for i in position_list:
+            if(np.sqrt((i.x-x)**2 + (i.y-y)**2) < 4) and i.empty == True:
+                flag = True
+                pos = i
+        if(np.sqrt((ficha[1]-pos.x)**2) < 4 or np.sqrt((ficha[2]-pos.y)**2) < 4) and flag:
+            return True
+        return False
 
     def mainloop(self):
         self.window.mainloop()
+
 
 milisInstance = WindMillPlay()
 milisInstance.mainloop()
