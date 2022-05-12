@@ -11,7 +11,9 @@ class Position:
         if np.sqrt((x-self.x)**2+(y-self.y)**2) < 4:
             return True
         return False
-
+    def set_coor(self,x,y):
+        self.x = x
+        self.y = y
 
 position_list = list()
 position_list.append(Position(30, 20))

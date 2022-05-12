@@ -64,7 +64,7 @@ class WindMillPlay:
             self.change = True
 
     def eliminando(self,e):
-        if self.validatePosition(e.x, e.y, self.position):
+        if self.validatePosition(e.x, e.y, self.position[1], self.position[2]):
             self.a = PhotoImage(file="piece.png")
             self.id = self.canvas.create_image(e.x, e.y, image=self.a)
             self.lista.append([self.id, e.x, e.y])
@@ -76,14 +76,16 @@ class WindMillPlay:
         else:
             print("Movimiento inválido, seleccione otra posición")
 
-    def validatePosition(self, x, y, ficha):
+    def validatePosition(self, x, y, ficha_x, ficha_y):
         flag = False
         pos = Position(0,0)
         for i in position_list:
-            if(np.sqrt((i.x-x)**2 + (i.y-y)**2) < 4) and i.empty == True:
+            if i.in_the_radio(x,y) and i.empty == True:
                 flag = True
-                pos = i
-        if(np.sqrt((ficha[1]-pos.x)**2) < 4 or np.sqrt((ficha[2]-pos.y)**2) < 4) and flag:
+                print("Hola")
+                break
+        if(np.sqrt((ficha_x-i.x)**2) < 4 or np.sqrt((ficha_y-i.y)**2) < 4) and flag:
+            print("Chau")
             return True
         return False
 
