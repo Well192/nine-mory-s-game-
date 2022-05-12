@@ -9,6 +9,7 @@ class WindMillPlay:
         self.window.title('windMillPlay')
         self.window.geometry("400x400")
         self.canvas = Canvas(self.window)
+        self.state = True
         self.change = True
         self.count = 0  # contador de fichas
 
@@ -47,8 +48,10 @@ class WindMillPlay:
         self.deli = 0
         self.window.bind('<Button-1>', self.start)
 
-    def moviendoFicha(self, e):
+    def start(self,e):
+        posicionandoFicha(self,e)
 
+    def moviendoFicha(self, e):
         if self.change:
             for i in self.lista:
                 if (np.sqrt((i[1]-e.x)**2 + (i[2]-e.y)**2) < 4) and (i[0]%2!=0):
@@ -57,6 +60,7 @@ class WindMillPlay:
                     self.change = False
         else:
             self.change = True
+
     def eliminando(self,e):
         self.a = PhotoImage(file="piece.png")
         self.id = self.canvas.create_image(e.x, e.y, image=self.a)
@@ -65,11 +69,6 @@ class WindMillPlay:
         self.a.name = self.a.name + "1"
         self.count += 1
         self.canvas.delete(self.deli)
-
-
-    def start(self,e):
-        posicionandoFicha(self,e)
-
 
     def mainloop(self):
         self.window.mainloop()
