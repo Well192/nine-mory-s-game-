@@ -3,6 +3,7 @@ from Data import *
 from Logic import *
 import numpy as np
 
+
 class WindMillPlay:
     def __init__(self):
         self.window = Tk()
@@ -51,28 +52,29 @@ class WindMillPlay:
 
         if self.change:
             for i in self.lista:
-                if (np.sqrt((i[1]-e.x)**2 + (i[2]-e.y)**2) < 4) and (i[0]%2!=0):
+                if (np.sqrt((i[1]-e.x)**2 + (i[2]-e.y)**2) < 4) and (i[0] % 2 != 0):
                     self.deli = i[0]
-                    self.window.bind("<Button-1>",self.eliminando)
+                    self.window.bind("<Button-1>", self.eliminando)
                     self.change = False
         else:
             self.change = True
-    def eliminando(self,e):
+    def eliminando(self, e):
         self.a = PhotoImage(file="piece.png")
         self.id = self.canvas.create_image(e.x, e.y, image=self.a)
-        self.lista.append([self.id,e.x,e.y])
+        self.lista.append([self.id, e.x, e.y])
         self.change = False
         self.a.name = self.a.name + "1"
         self.count += 1
         self.canvas.delete(self.deli)
 
 
-    def start(self,e):
-        posicionandoFicha(self,e)
+    def start(self, e):
+        posicionandoFicha(self, e)
 
 
     def mainloop(self):
         self.window.mainloop()
+
 
 milisInstance = WindMillPlay()
 milisInstance.mainloop()

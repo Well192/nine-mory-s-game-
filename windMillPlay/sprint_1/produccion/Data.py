@@ -1,17 +1,19 @@
 import numpy as np
 
+
 class Position:
     def __init__(self, x, y):
-        self.empty=True
+        self.empty = True
         self.x = int(x)
         self.y = int(y)
 
-    def in_the_radio(self,x ,y):
+    def in_the_radio(self, x, y):
         if np.sqrt((x-self.x)**2+(y-self.y)**2) < 4:
             return True
         return False
 
-position_list=list()
+
+position_list = list()
 position_list.append(Position(30, 20))
 position_list.append(Position(190, 20))
 position_list.append(Position(350, 20))
@@ -38,4 +40,3 @@ position_list.append(Position(100, 200))
 position_list.append(Position(100, 145))
 position_list.append(Position(186, 46))
 position_list.append(Position(343, 259))
-
