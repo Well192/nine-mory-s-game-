@@ -1,6 +1,7 @@
 from tkinter import *
 from Data import *
 from Logic import *
+import numpy as np
 
 class WindMillPlay:
     def __init__(self):
@@ -43,15 +44,28 @@ class WindMillPlay:
         self.canvas.grid(column=0, row=0, sticky="N, W, E, S")
 
         self.lista = list()
-
+        self.deli = 0
         self.window.bind('<Button-1>', self.start)
 
     def moviendoFicha(self, e):
+
         if self.change:
-            print(e.x, e.y)
-            #print("soy el blanco")
+            for i in self.lista:
+                if (np.sqrt((i[1]-e.x)**2 + (i[2]-e.y)**2) < 4) and (i[0]%2!=0):
+                    self.deli = i[0]
+                    self.window.bind("<Button-1>",self.eliminando)
+                    self.change = False
         else:
-            print(e.x, e.y)
+            self.change = True
+    def eliminando(self,e):
+        self.a = PhotoImage(file="piece.png")
+        self.id = self.canvas.create_image(e.x, e.y, image=self.a)
+        self.lista.append([self.id,e.x,e.y])
+        self.change = False
+        self.a.name = self.a.name + "1"
+        self.count += 1
+        self.canvas.delete(self.deli)
+
 
     def start(self,e):
         posicionandoFicha(self,e)
