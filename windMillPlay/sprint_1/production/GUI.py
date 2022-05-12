@@ -49,7 +49,8 @@ class WindMillPlay:
         self.window.bind('<Button-1>', self.start)
 
     def start(self,e):
-        posicionandoFicha(self,e)
+        game = WindMillPlayGame()
+        game.posicionandoFicha(self,e)
 
     def moviendoFicha(self, e):
         if self.change:

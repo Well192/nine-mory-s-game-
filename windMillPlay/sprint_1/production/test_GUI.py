@@ -5,5 +5,5 @@ from GUI import WindMillPlay
 
 class TestWindMillPlay(TestCase):
     def test_create_board(self):
-        game = WindMillPlay()
-        self.assertEqual(True, game.state)
+        gameGUI = WindMillPlay()
+        self.assertEqual(True, gameGUI.state)
