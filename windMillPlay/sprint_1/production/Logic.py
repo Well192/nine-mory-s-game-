@@ -1,5 +1,5 @@
 from tkinter import *
-from Data import *
+from windMillPlay.sprint_1.production.Data import *
 
 
 class WindMillPlayGame:

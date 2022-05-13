@@ -1,7 +1,5 @@
 import unittest
-from unittest import *
 from unittest import TestCase
-from windMillPlay.sprint_1.production.Data import Position
 from windMillPlay.sprint_1.production.GUI import WindMillPlay
 
 class TestWindMillPlay(TestCase):

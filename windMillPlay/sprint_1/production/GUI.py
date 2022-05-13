@@ -1,6 +1,4 @@
-from tkinter import *
-from Data import *
-from Logic import *
+from windMillPlay.sprint_1.production.Logic import *
 import numpy as np
 
 
