@@ -76,14 +76,11 @@ class WindMillPlay:
 
     def validatePosition(self, x, y, ficha_x, ficha_y):
         flag = False
-        pos = Position(0,0)
         for i in position_list:
             if i.in_the_radio(x,y) and i.empty == True:
                 flag = True
-                print("Hola")
                 break
-        if(np.sqrt((ficha_x-i.x)**2) < 4 or np.sqrt((ficha_y-i.y)**2) < 4) and flag:
-            print("Chau")
+        if(np.sqrt((ficha_x-i.x)**2) < 4 and np.sqrt((ficha_y-i.y)**2) < 4) and flag:
             return True
         return False
 
