@@ -20,56 +20,61 @@ class WindMillPlay:
 
     def start(self, e):
         game = WindMillPlayGame()
-        print(e.x, " ", e.y)
+        #print(e.x, " ", e.y)
         game.posicionandoFicha(self, e)
 
     def moviendoFicha(self, e):
-        print(self.lista)
+        #print(self.lista)
         if self.change:
             for i in self.lista:
-                if (np.sqrt((i[1] - e.x) ** 2 + (i[2] - e.y) ** 2) < 10) and (i[0] % 2 != 0):
+                if (np.sqrt((i[1] - e.x) ** 2 + (i[2] - e.y) ** 2) < 10):
                     self.position = i
                     self.window.bind("<Button-1>", self.eliminando)
-                    self.change = False
+                    #self.change = False
+            print("Turno blanco")
         else:
             for i in self.lista:
-                if (np.sqrt((i[1] - e.x) ** 2 + (i[2] - e.y) ** 2) < 10) and (i[0] % 2 == 0):
+                if (np.sqrt((i[1] - e.x) ** 2 + (i[2] - e.y) ** 2) < 10):
                     self.position = i
                     self.window.bind("<Button-1>", self.eliminando)
-                    self.change = True
+                    #self.change = True
+            print("Turno negro")
 
     def eliminando(self, e):
         if self.validatePosition(e.x, e.y, self.position[1], self.position[2]):
-            if self.position[0] % 2 != 0:
+            if self.change:
                 self.a = PhotoImage(file="piece.png")
-                self.id = self.canvas.create_image(e.x, e.y, image=self.a)
-                self.lista.append([self.id, e.x, e.y])
-                self.a.name = self.a.name + "1"
-                self.count += 1
-                self.canvas.delete(self.position[0])
-                self.lista.remove(self.position)
-                self.window.bind("<Button-1>", self.moviendoFicha)
-            if self.position[0] % 2 == 0:
+            else:
                 self.a = PhotoImage(file="piece2.png")
-                self.id = self.canvas.create_image(e.x, e.y, image=self.a)
-                self.lista.append([self.id, e.x, e.y])
-                self.a.name = self.a.name + "1"
-                self.count += 1
-                self.canvas.delete(self.position[0])
-                self.lista.remove(self.position)
-                self.window.bind("<Button-1>", self.moviendoFicha)
-        else:
-            print("movimiento no valido")
 
-    def validatePosition(self, x, y, ficha_x, ficha_y):
-        flag = False
+            self.id = self.canvas.create_image(e.x, e.y, image=self.a)
+            self.lista.append([self.id, e.x, e.y])
+            self.a.name = self.a.name + "1"
+            self.count += 1
+            self.canvas.delete(self.position[0])
+            self.lista.remove(self.position)
+            print(self.change)
+            if self.change:
+                self.change= False
+            else:
+                self.change = True
+            self.window.bind("<Button-1>", self.moviendoFicha)
+        else:
+            print("Movimiento no válido")
+
+    def validatePosition(self, x, y, ficha_x, ficha_y): #Recibe las coordenadas dónde se quiere mover y recibe las coordenadas de la ficha que quiere mover
+        isValid = False
+        #Verificar si  el lugar dónde quiero ubicar la ficha es un vértice
         for i in position_list:
             if i.in_the_radio(x, y) and i.empty == True:
-                flag = True
+                isValid = True
                 break
-            if (np.sqrt(np.abs((ficha_x - i.x + ficha_y - i.y))) < 10) and flag:
-                return True
-        return False
+
+        #if (np.sqrt(np.abs((ficha_x - i.x + ficha_y - i.y))) < 10) and isValid:
+        #    return isValid
+
+        isValid = False
+        return isValid
 
     def mainloop(self):
         self.window.mainloop()

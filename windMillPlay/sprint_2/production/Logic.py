@@ -21,7 +21,7 @@ class WindMillPlayGame:
             for i in position_list:
                 if i.in_the_radio(event.x, event.y) and i.empty:
                     i.empty = False
-                    if object.count >= 18:
+                    if object.count >= 4:
                         object.change = True
                         object.window.bind('<Button-1>', object.moviendoFicha)
                         object.a = PhotoImage(file="piece2.png")
