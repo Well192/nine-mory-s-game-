@@ -52,6 +52,7 @@ class WindMillPlay:
         game.posicionandoFicha(self,e)
 
     def moviendoFicha(self, e):
+        print(self.lista)
         if self.change:
             for i in self.lista:
                 if (np.sqrt((i[1]-e.x)**2 + (i[2]-e.y)**2) < 4) and (i[0]%2!=0):
@@ -59,20 +60,34 @@ class WindMillPlay:
                     self.window.bind("<Button-1>",self.eliminando)
                     self.change = False
         else:
-            self.change = True
+            for i in self.lista:
+                if (np.sqrt((i[1]-e.x)**2 + (i[2]-e.y)**2) < 4) and (i[0]%2==0):
+                    self.position = i
+                    self.window.bind("<Button-1>",self.eliminando)
+                    self.change = True
 
     def eliminando(self,e):
         if self.validatePosition(e.x, e.y, self.position[1], self.position[2]):
-            self.a = PhotoImage(file="piece.png")
-            self.id = self.canvas.create_image(e.x, e.y, image=self.a)
-            self.lista.append([self.id, e.x, e.y])
-            self.change = False
-            self.a.name = self.a.name + "1"
-            self.count += 1
-
-            self.canvas.delete(self.position[0])
+            if(self.position[0]%2!=0):
+                self.a = PhotoImage(file="piece.png")
+                self.id = self.canvas.create_image(e.x, e.y, image=self.a)
+                self.lista.append([self.id, e.x, e.y])
+                self.a.name = self.a.name + "1"
+                self.count += 1
+                self.canvas.delete(self.position[0])
+                self.lista.remove(self.position)
+                self.window.bind("<Button-1>",self.moviendoFicha)
+            if(self.position[0]%2==0):
+                self.a = PhotoImage(file="piece2.png")
+                self.id = self.canvas.create_image(e.x, e.y, image=self.a)
+                self.lista.append([self.id, e.x, e.y])
+                self.a.name = self.a.name + "1"
+                self.count += 1
+                self.canvas.delete(self.position[0])
+                self.lista.remove(self.position)
+                self.window.bind("<Button-1>",self.moviendoFicha)
         else:
-            print("Movimiento inválido, seleccione otra posición")
+            print("movimiento no valido")
 
     def validatePosition(self, x, y, ficha_x, ficha_y):
         flag = False
@@ -80,7 +95,7 @@ class WindMillPlay:
             if i.in_the_radio(x,y) and i.empty == True:
                 flag = True
                 break
-        if(np.sqrt((ficha_x-i.x)**2) < 4 and np.sqrt((ficha_y-i.y)**2) < 4) and flag:
+        if(np.sqrt(np.abs((ficha_x-i.x + ficha_y-i.y))) < 10) and flag:
             return True
         return False
 
