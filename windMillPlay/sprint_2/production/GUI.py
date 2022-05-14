@@ -1,7 +1,6 @@
 from windMillPlay.sprint_2.production.Logic import *
 import numpy as np
 
-
 class WindMillPlay:
     def __init__(self):
         self.window = Tk()
@@ -31,6 +30,8 @@ class WindMillPlay:
                     self.position = i
                     self.window.bind("<Button-1>", self.eliminando)
                     #self.change = False
+                else:
+                    print("Elige una ficha válida")
             print("Turno blanco")
         else:
             for i in self.lista:
@@ -38,26 +39,32 @@ class WindMillPlay:
                     self.position = i
                     self.window.bind("<Button-1>", self.eliminando)
                     #self.change = True
+                else:
+                    print("Elige una ficha válida")
             print("Turno negro")
 
     def eliminando(self, e):
         if self.validatePosition(e.x, e.y, self.position[1], self.position[2]):
             if self.change:
                 self.a = PhotoImage(file="piece.png")
+                self.change= False
+                self.id = self.canvas.create_image(e.x, e.y, image=self.a)
+                self.lista.append([self.id, e.x, e.y])
+                self.a.name = self.a.name + "1"
+                self.count += 1
+                self.canvas.delete(self.position[0])
+                self.lista.remove(self.position)
             else:
                 self.a = PhotoImage(file="piece2.png")
+                self.change= True
+                self.id = self.canvas.create_image(e.x, e.y, image=self.a)
+                self.lista.append([self.id, e.x, e.y])
+                self.a.name = self.a.name + "1"
+                self.count += 1
+                self.canvas.delete(self.position[0])
+                self.lista.remove(self.position)
 
-            self.id = self.canvas.create_image(e.x, e.y, image=self.a)
-            self.lista.append([self.id, e.x, e.y])
-            self.a.name = self.a.name + "1"
-            self.count += 1
-            self.canvas.delete(self.position[0])
-            self.lista.remove(self.position)
-            print(self.change)
-            if self.change:
-                self.change= False
-            else:
-                self.change = True
+            #print(self.change)
             self.window.bind("<Button-1>", self.moviendoFicha)
         else:
             print("Movimiento no válido")
@@ -69,10 +76,18 @@ class WindMillPlay:
             if i.in_the_radio(x, y) and i.empty == True:
                 isValid = True
                 break
+        for j in position_list:
+            if j.in_the_radio(ficha_x, ficha_y):
+                isValid = True
+                break
+        adyacentes = j.allowed_positions()
+        if isValid:
+            for k in adyacentes:
+                if i.indicator == k:
+                    return isValid
 
         #if (np.sqrt(np.abs((ficha_x - i.x + ficha_y - i.y))) < 10) and isValid:
         #    return isValid
-
         isValid = False
         return isValid
 
