@@ -82,7 +82,7 @@ class WindMillPlay:
         adyacentes = posicion_ficha.allowed_positions()
 
         for k in adyacentes:
-            if k == posicion2.indicator and isValid:
+            if k == posicion2.id and isValid:
                 return isValid
 
         isValid = False
