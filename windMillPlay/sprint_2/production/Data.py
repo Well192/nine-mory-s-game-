@@ -9,7 +9,7 @@ class Position:
         self.indicator = int(indicator)
 
     def in_the_radio(self, x, y):
-        if np.sqrt((x - self.x) ** 2 + (y - self.y) ** 2) < 10:
+        if np.sqrt((x - self.x) ** 2 + (y - self.y) ** 2) < 8:
             return True
         return False
 
@@ -25,7 +25,7 @@ class Position:
         if self.indicator == 1:
             return [2,8]
         if self.indicator == 2:
-            return [1,2]
+            return [1,3,10]
         if self.indicator == 3:
             return [2,4]
         if self.indicator == 4:
@@ -45,11 +45,11 @@ class Position:
         if self.indicator == 11:
             return [10,12]
         if self.indicator == 12:
-            return [4,11,20,13]
+            return [4,11,13,20]
         if self.indicator == 13:
             return [12,14]
         if self.indicator == 14:
-            return [13,15,22]
+            return [6,13,15,22]
         if self.indicator == 15:
             return [16,14]
         if self.indicator == 16:
