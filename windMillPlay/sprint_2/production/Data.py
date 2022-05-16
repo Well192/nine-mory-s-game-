@@ -1,12 +1,11 @@
 import numpy as np
 
 class Position:
-    def __init__(self, x, y,indicator):
+    def __init__(self, x, y,id):
         self.empty = True
         self.x = int(x)
         self.y = int(y)
-        self.id = 0
-        self.indicator = int(indicator)
+        self.id = int(id)
 
     def in_the_radio(self, x, y):
         if np.sqrt((x - self.x) ** 2 + (y - self.y) ** 2) < 10:
@@ -17,58 +16,58 @@ class Position:
         self.x = x
         self.y = y
 
-    def get_indicator(self, x, y):
+    def get_id(self, x, y):
         if self.in_the_radio(x,y):
-            return self.indicator
+            return self.id
 
     def allowed_positions(self):
-        if self.indicator == 1:
+        if self.id == 1:
             return [2, 8]
-        if self.indicator == 2:
+        if self.id == 2:
             return [1, 3, 10]
-        if self.indicator == 3:
+        if self.id == 3:
             return [2, 4]
-        if self.indicator == 4:
+        if self.id == 4:
             return [3, 5, 12]
-        if self.indicator == 5:
+        if self.id == 5:
             return [4, 6]
-        if self.indicator == 6:
+        if self.id == 6:
             return [5, 7, 14]
-        if self.indicator == 7:
+        if self.id == 7:
             return [6, 8]
-        if self.indicator == 8:
+        if self.id == 8:
             return [1, 7, 16]
-        if self.indicator == 9:
+        if self.id == 9:
             return [10, 16]
-        if self.indicator == 10:
+        if self.id == 10:
             return [2, 9, 11, 18]
-        if self.indicator == 11:
+        if self.id == 11:
             return [10, 12]
-        if self.indicator == 12:
+        if self.id == 12:
             return [4, 11, 13, 20]
-        if self.indicator == 13:
+        if self.id == 13:
             return [12, 14]
-        if self.indicator == 14:
+        if self.id == 14:
             return [6, 13, 15, 22]
-        if self.indicator == 15:
+        if self.id == 15:
             return [14, 16]
-        if self.indicator == 16:
+        if self.id == 16:
             return [8, 9, 15, 24]
-        if self.indicator == 17:
+        if self.id == 17:
             return [18, 24]
-        if self.indicator == 18:
+        if self.id == 18:
             return [10, 17, 19]
-        if self.indicator == 19:
+        if self.id == 19:
             return [18, 20]
-        if self.indicator == 20:
+        if self.id == 20:
             return [12, 19, 21]
-        if self.indicator == 21:
+        if self.id == 21:
             return [20, 22]
-        if self.indicator == 22:
+        if self.id == 22:
             return [14, 21, 23]
-        if self.indicator == 23:
+        if self.id == 23:
             return [22, 24]
-        if self.indicator == 24:
+        if self.id == 24:
             return [16, 17, 23]
 
 position_list = list()

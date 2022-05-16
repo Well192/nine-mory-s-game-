@@ -1,42 +1,24 @@
 from tkinter import *
 from windMillPlay.sprint_2.production.Data import *
 
-
 class WindMillPlayGame:
     def __init__(self):
         self.state= "Progreso"
 
     def posicionandoFicha(self, object, event):
-        if object.change:
-            for i in position_list:
-                if i.in_the_radio(event.x, event.y) and i.empty:
-                    i.empty = False
+        for i in position_list:
+            if i.in_the_radio(event.x, event.y) and i.empty:
+                i.empty = False
+                if object.change:
                     object.a = PhotoImage(file="piece.png")
-                    object.id = object.canvas.create_image(i.x, i.y, image=object.a)
-                    object.lista.append([object.id,event.x,event.y])
                     object.change = False
-                    object.a.name = object.a.name + "1"
-                    object.count += 1
-            #print(object.id)
-        else:
-            for i in position_list:
-                if i.in_the_radio(event.x, event.y) and i.empty:
-                    i.empty = False
+                else:
+                    object.a = PhotoImage(file="piece2.png")
+                    object.change = True
                     if object.count >= 2:
-                        object.change = True
                         object.window.bind('<Button-1>', object.seleccionandoFicha)
-                        object.a = PhotoImage(file="piece2.png")
-                        object.id = object.canvas.create_image(i.x, i.y, image=object.a)
-                        object.lista.append([object.id,event.x,event.y])
-                        object.a.name = object.a.name + "1"
 
-                    else:
-                        object.a = PhotoImage(file="piece2.png")
-                        object.id = object.canvas.create_image(i.x, i.y, image=object.a)
-                        object.lista.append([object.id,event.x,event.y])
-                        object.change = True
-                        object.a.name = object.a.name + "1"
-                        object.count += 1
-            #print(object.id)
-
-
+                object.id = object.canvas.create_image(i.x, i.y, image=object.a)
+                object.lista.append([object.id,event.x,event.y])
+                object.a.name = object.a.name + "1"
+                object.count += 1

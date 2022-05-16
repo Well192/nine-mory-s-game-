@@ -27,7 +27,7 @@ class WindMillPlay:
                     self.position = i
                     self.window.bind("<Button-1>", self.moviendoFicha)
                 else:
-                    print("Elige una ficha válida")
+                    print("Elige una ficha amarilla")
             print("==================Turno blanco======================")
         else:
             for i in self.lista:
@@ -35,45 +35,42 @@ class WindMillPlay:
                     self.position = i
                     self.window.bind("<Button-1>", self.moviendoFicha)
                 else:
-                    print("Elige una ficha válida")
+                    print("Elige una ficha negra")
             print("=====================Turno negro=========================")
 
     def moviendoFicha(self, e):
+        global posi2, posi
         if self.validatePosition(e.x, e.y, self.position[1], self.position[2]):
             for j in position_list:
-                if j.in_the_radio(self.position[1], self.position[2]):
+                if j.in_the_radio(self.position[1], self.position[2]): #Ubica la posición de la ficha
                     posi = j
-                if j.in_the_radio(e.x,e.y):
+                if j.in_the_radio(e.x,e.y): #Ubica la posición de la nueva posición
                     posi2 = j
-            #Agregar for para ubicar i
+
             if self.change:
                 self.a = PhotoImage(file="piece.png")
                 self.change= False
-                self.id = self.canvas.create_image(e.x, e.y, image=self.a)
-                self.lista.append([self.id, e.x, e.y])
-                self.a.name = self.a.name + "1"
-                self.canvas.delete(self.position[0])
-                self.lista.remove(self.position)
             else:
                 self.a = PhotoImage(file="piece2.png")
                 self.change= True
-                self.id = self.canvas.create_image(e.x, e.y, image=self.a)
-                self.lista.append([self.id, e.x, e.y])
-                self.a.name = self.a.name + "1"
-                self.canvas.delete(self.position[0])
-                self.lista.remove(self.position)
+
+            self.id = self.canvas.create_image(posi2.x, posi2.y, image=self.a)
+            self.lista.append([self.id, e.x, e.y])
+            self.a.name = self.a.name + "1"
+            self.canvas.delete(self.position[0])
+            self.lista.remove(self.position)
 
             posi.empty = True
             posi2.empty = False
 
-            self.window.bind("<Button-1>", self.seleccionandoFicha)
         else:
             print("Movimiento no válido")
 
+        self.window.bind("<Button-1>", self.seleccionandoFicha)
     def validatePosition(self, x, y, ficha_x, ficha_y):
         #Recibe las coordenadas dónde se quiere mover y recibe las coordenadas de la ficha que quiere mover
+        global posicion_ficha, posicion2
         isValid = False
-
         #Verificar si  el lugar dónde quiero ubicar la ficha es un intersección
         for i in position_list:
             if i.in_the_radio(ficha_x, ficha_y):
@@ -82,15 +79,12 @@ class WindMillPlay:
                 posicion2 = i
                 isValid = True
 
-        #print(f"isValid: ",isValid)
         adyacentes = posicion_ficha.allowed_positions()
-        #print(adyacentes)
+
         for k in adyacentes:
             if k == posicion2.indicator and isValid:
-                print(posicion_ficha.empty)
-                print(k)
                 return isValid
-        #print(isValid)
+
         isValid = False
         return isValid
 
