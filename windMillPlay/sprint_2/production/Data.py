@@ -1,11 +1,13 @@
 import numpy as np
 
+
 class Position:
-    def __init__(self, x, y,id):
+    def __init__(self, x, y, id):
         self.empty = True
         self.x = int(x)
         self.y = int(y)
         self.id = int(id)
+        self.ficha = -1
 
     def in_the_radio(self, x, y):
         if np.sqrt((x - self.x) ** 2 + (y - self.y) ** 2) < 10:
@@ -16,8 +18,11 @@ class Position:
         self.x = x
         self.y = y
 
+    def get_coor(self):
+        return self.x, self.y
+
     def get_id(self, x, y):
-        if self.in_the_radio(x,y):
+        if self.in_the_radio(x, y):
             return self.id
 
     def allowed_positions(self):
@@ -70,28 +75,29 @@ class Position:
         if self.id == 24:
             return [16, 17, 23]
 
-position_list = list()
-#Primer Cuadrado
-position_list.append(Position(25, 25,1))
-position_list.append(Position(350, 25,2))
-position_list.append(Position(675, 25,3))
-position_list.append(Position(675, 345,4))
-position_list.append(Position(675, 675,5))
-position_list.append(Position(350, 675,6))
-position_list.append(Position(25, 675,7))
-position_list.append(Position(25, 345,8))
 
-#Segundo Cuadrado
+position_list = list()
+# Primer Cuadrado
+position_list.append(Position(25, 25, 1))
+position_list.append(Position(350, 25, 2))
+position_list.append(Position(675, 25, 3))
+position_list.append(Position(675, 345, 4))
+position_list.append(Position(675, 675, 5))
+position_list.append(Position(350, 675, 6))
+position_list.append(Position(25, 675, 7))
+position_list.append(Position(25, 345, 8))
+
+# Segundo Cuadrado
 position_list.append(Position(105, 105, 9))
 position_list.append(Position(350, 105, 10))
-position_list.append(Position(592, 105,11))
-position_list.append(Position(592, 350,12))
-position_list.append(Position(592, 592,13))
+position_list.append(Position(592, 105, 11))
+position_list.append(Position(592, 350, 12))
+position_list.append(Position(592, 592, 13))
 position_list.append(Position(350, 592, 14))
 position_list.append(Position(105, 592, 15))
 position_list.append(Position(105, 345, 16))
 
-#Tercer cuadrado
+# Tercer cuadrado
 position_list.append(Position(200, 200, 17))
 position_list.append(Position(350, 203, 18))
 position_list.append(Position(495, 203, 19))
