@@ -9,7 +9,7 @@ class Position:
         self.indicator = int(indicator)
 
     def in_the_radio(self, x, y):
-        if np.sqrt((x - self.x) ** 2 + (y - self.y) ** 2) < 8:
+        if np.sqrt((x - self.x) ** 2 + (y - self.y) ** 2) < 10:
             return True
         return False
 
@@ -23,53 +23,53 @@ class Position:
 
     def allowed_positions(self):
         if self.indicator == 1:
-            return [2,8]
+            return [2, 8]
         if self.indicator == 2:
-            return [1,3,10]
+            return [1, 3, 10]
         if self.indicator == 3:
-            return [2,4]
+            return [2, 4]
         if self.indicator == 4:
-            return [3,5,12]
+            return [3, 5, 12]
         if self.indicator == 5:
-            return [4,6]
+            return [4, 6]
         if self.indicator == 6:
-            return [5,7,14]
+            return [5, 7, 14]
         if self.indicator == 7:
-            return [6,8]
+            return [6, 8]
         if self.indicator == 8:
-            return [1,16,7]
+            return [1, 7, 16]
         if self.indicator == 9:
-            return [10,16]
+            return [10, 16]
         if self.indicator == 10:
-            return [2,9,11,18]
+            return [2, 9, 11, 18]
         if self.indicator == 11:
-            return [10,12]
+            return [10, 12]
         if self.indicator == 12:
-            return [4,11,13,20]
+            return [4, 11, 13, 20]
         if self.indicator == 13:
-            return [12,14]
+            return [12, 14]
         if self.indicator == 14:
-            return [6,13,15,22]
+            return [6, 13, 15, 22]
         if self.indicator == 15:
-            return [16,14]
+            return [14, 16]
         if self.indicator == 16:
-            return [8,9,15,24]
+            return [8, 9, 15, 24]
         if self.indicator == 17:
-            return [18,24]
+            return [18, 24]
         if self.indicator == 18:
-            return [10,17,19]
+            return [10, 17, 19]
         if self.indicator == 19:
             return [18, 20]
         if self.indicator == 20:
-            return [12,19,21]
+            return [12, 19, 21]
         if self.indicator == 21:
-            return [20,22]
+            return [20, 22]
         if self.indicator == 22:
-            return [14,21,23]
+            return [14, 21, 23]
         if self.indicator == 23:
-            return [24,22]
+            return [22, 24]
         if self.indicator == 24:
-            return [23, 17, 16]
+            return [16, 17, 23]
 
 position_list = list()
 #Primer Cuadrado
