@@ -19,7 +19,9 @@ class WindMillPlay:
 
     def start(self, e):
         game = WindMillPlayGame()
+        print("x",e.x,"y", e.y)
         game.posicionandoFicha(self, e)
+        print(e.x, e.y)
 
     def seleccionandoFicha(self, e):
         if self.change:
@@ -56,8 +58,6 @@ class WindMillPlay:
 
             self.id = self.canvas.create_image(posi2.x, posi2.y, image=self.a)
             self.lista.append([self.id, e.x, e.y])
-            posi.id = -1
-            posi2.id = self.id
             self.a.name = self.a.name + "1"
             self.canvas.delete(self.position[0])
             self.lista.remove(self.position)
