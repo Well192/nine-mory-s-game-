@@ -18,28 +18,22 @@ class WindMillPlay:
         self.window.bind('<Button-1>', self.start)
 
     def start(self, e):
-        game = WindMillPlayGame()
-        print("x",e.x,"y", e.y)
-        game.posicionandoFicha(self, e)
-        print(e.x, e.y)
+        self.game = WindMillPlayGame()
+        self.game.posicionandoFicha(self, e)
 
     def seleccionandoFicha(self, e):
         if self.change:
+            print("==================Turno blanco======================")
             for i in self.lista:
                 if (np.sqrt((i[1] - e.x) ** 2 + (i[2] - e.y) ** 2) < 10) and i[0] % 2 == 0:
                     self.position = i
                     self.window.bind("<Button-1>", self.moviendoFicha)
-                else:
-                    print("Elige una ficha amarilla")
-            print("==================Turno blanco======================")
         else:
+            print("=====================Turno negro=========================")
             for i in self.lista:
                 if (np.sqrt((i[1] - e.x) ** 2 + (i[2] - e.y) ** 2) < 10) and i[0] % 2 != 0:
                     self.position = i
                     self.window.bind("<Button-1>", self.moviendoFicha)
-                else:
-                    print("Elige una ficha negra")
-            print("=====================Turno negro=========================")
 
     def moviendoFicha(self, e):
         global posi2, posi
@@ -61,9 +55,12 @@ class WindMillPlay:
             self.a.name = self.a.name + "1"
             self.canvas.delete(self.position[0])
             self.lista.remove(self.position)
-
+            posi.ficha = -1
+            posi2.ficha = self.id
             posi.empty = True
             posi2.empty = False
+            self.game.volada()
+
         else:
             print("Movimiento no válido")
 
