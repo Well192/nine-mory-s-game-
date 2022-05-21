@@ -59,7 +59,7 @@ class WindMillPlay:
             posi2.ficha = self.id
             posi.empty = True
             posi2.empty = False
-            self.game.volada()
+            self.game.volada(self.id)
 
         else:
             print("Movimiento no válido")
