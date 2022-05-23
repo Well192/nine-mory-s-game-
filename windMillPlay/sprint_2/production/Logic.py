@@ -27,28 +27,33 @@ class WindMillPlayGame:
                 object.count += 1
                 self.volada(i.ficha)
 
+
     def volada(self,flag):
-        #position_list[i.id-1].ficha == flag
         for i in position_list:
             if not i.empty:
                 if i.id % 2 == 1:
                     if i.id == 1 or i.id == 9 or i.id == 17:
-                        if position_list[i.id + 6].ficha % 2 == 0 and position_list[i.id + 5].ficha % 2 == 0 and position_list[i.id-1].ficha % 2 == 0 and (position_list[i.id + 6].ficha==flag or position_list[i.id + 5].ficha ==flag or position_list[i.id-1].ficha==flag) :
+                        if position_list[i.id + 6].ficha % 2 == 0 and position_list[i.id + 5].ficha % 2 == 0 and position_list[i.id-1].ficha % 2 == 0 and \
+                                (position_list[i.id + 6].ficha == flag or position_list[i.id + 5].ficha == flag or position_list[i.id-1].ficha == flag):
                             return True
-                        if position_list[i.id + 6].ficha % 2 == 1 and position_list[i.id + 6].ficha != -1 and position_list[i.id-1].ficha % 2 == 1 and position_list[i.id + 5].ficha % 2 == 1 and position_list[i.id + 5].ficha != -1 and (position_list[i.id + 6].ficha==flag or position_list[i.id + 5].ficha ==flag or position_list[i.id-1].ficha==flag) :
+                        if position_list[i.id + 6].ficha % 2 == 1 and position_list[i.id + 6].ficha != -1 and position_list[i.id-1].ficha % 2 == 1 and position_list[i.id + 5].ficha % 2 == 1 and position_list[i.id + 5].ficha != -1 and \
+                                (position_list[i.id + 6].ficha == flag or position_list[i.id + 5].ficha == flag or position_list[i.id-1].ficha == flag):
                             return True
                     else:
-                        if position_list[i.id-2].ficha % 2 == 0 and position_list[i.id-3].ficha % 2 == 0 and position_list[i.id-1].ficha % 2 == 0 and (position_list[i.id -1].ficha == flag or position_list[i.id-2].ficha == flag or position_list[i.id-3].ficha == flag )  :
-
+                        if position_list[i.id-2].ficha % 2 == 0 and position_list[i.id-3].ficha % 2 == 0 and position_list[i.id-1].ficha % 2 == 0 and \
+                                (position_list[i.id -1].ficha == flag or position_list[i.id-2].ficha == flag or position_list[i.id-3].ficha == flag):
                             return True
-                        if position_list[i.id-2].ficha % 2 == 1 and position_list[i.id-2].ficha != -1 and  position_list[i.id-3].ficha % 2 == 1 and position_list[i.id-1].ficha % 2 == 1 and position_list[i.id-3].ficha != -1 and (position_list[i.id -1].ficha == flag or position_list[i.id-2].ficha == flag or position_list[i.id-3].ficha == flag )  :
+                        if position_list[i.id-2].ficha % 2 == 1 and position_list[i.id-2].ficha != -1 and position_list[i.id-3].ficha % 2 == 1 and position_list[i.id-1].ficha % 2 == 1 and position_list[i.id-3].ficha != -1 and \
+                                (position_list[i.id -1].ficha == flag or position_list[i.id-2].ficha == flag or position_list[i.id-3].ficha == flag):
                             return True
 
                 if i.id % 2 == 0:
                     if i.id == 2 or i.id == 4 or i.id == 6 or i.id == 8:
-                        if position_list[i.id + 7].ficha % 2 == 0 and position_list[i.id + 15].ficha % 2 == 0 and position_list[i.id-1].ficha % 2 == 0 and (position_list[i.id + 7].ficha==flag or position_list[i.id + 15].ficha==flag or position_list[i.id-1].ficha ==flag):
+                        if position_list[i.id + 7].ficha % 2 == 0 and position_list[i.id + 15].ficha % 2 == 0 and position_list[i.id-1].ficha % 2 == 0 and \
+                                (position_list[i.id + 7].ficha == flag or position_list[i.id + 15].ficha == flag or position_list[i.id-1].ficha == flag):
                             return True
-                        if position_list[i.id + 7].ficha % 2 == 1 and position_list[i.id + 7].ficha != -1 and position_list[i.id-1].ficha % 2 == 1 and position_list[i.id + 15].ficha % 2 == 1 and position_list[i.id + 15].ficha != -1  and (position_list[i.id + 7].ficha==flag or position_list[i.id + 15].ficha==flag or position_list[i.id-1].ficha==flag) :
+                        if position_list[i.id + 7].ficha % 2 == 1 and position_list[i.id + 7].ficha != -1 and position_list[i.id-1].ficha % 2 == 1 and position_list[i.id + 15].ficha % 2 == 1 and position_list[i.id + 15].ficha != -1 and \
+                                (position_list[i.id + 7].ficha == flag or position_list[i.id + 15].ficha == flag or position_list[i.id-1].ficha == flag):
                             return True
 
 

@@ -1,3 +1,5 @@
+import tkinter
+
 from windMillPlay.sprint_2.production.Logic import *
 import numpy as np
 
@@ -6,16 +8,19 @@ class WindMillPlay:
     def __init__(self):
         self.window = Tk()
         self.window.title('windMillPlay')
-        self.window.geometry("850x850")
+        self.window.geometry("750x750")
         self.canvas = Canvas(self.window, height=750, width=750)
         self.state = True
         self.change = True
         self.count = 0
         self.image_tablero = PhotoImage(file='tablero.png')
         self.tablero = self.canvas.create_image(0, 0, image=self.image_tablero, anchor=NW)
-        self.canvas.pack(expand=False)
         self.lista = list()
+        self.image_turno = PhotoImage(file='turno_blanco.png')
+        self.turno = self.canvas.create_image(375, 375, image=self.image_turno)
         self.window.bind('<Button-1>', self.start)
+        self.canvas.pack(expand=False)
+
 
     def start(self, e):
         self.game = WindMillPlayGame()
@@ -25,13 +30,13 @@ class WindMillPlay:
         if self.change:
             print("==================Turno blanco======================")
             for i in self.lista:
-                if (np.sqrt((i[1] - e.x) ** 2 + (i[2] - e.y) ** 2) < 10) and i[0] % 2 == 0:
+                if (np.sqrt((i[1] - e.x) ** 2 + (i[2] - e.y) ** 2) < 20) and i[0] % 2 == 0:
                     self.position = i
                     self.window.bind("<Button-1>", self.moviendoFicha)
         else:
             print("=====================Turno negro=========================")
             for i in self.lista:
-                if (np.sqrt((i[1] - e.x) ** 2 + (i[2] - e.y) ** 2) < 10) and i[0] % 2 != 0:
+                if (np.sqrt((i[1] - e.x) ** 2 + (i[2] - e.y) ** 2) < 20) and i[0] % 2 != 0:
                     self.position = i
                     self.window.bind("<Button-1>", self.moviendoFicha)
 

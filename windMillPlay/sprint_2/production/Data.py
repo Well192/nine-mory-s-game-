@@ -10,7 +10,7 @@ class Position:
         self.ficha = -1
 
     def in_the_radio(self, x, y):
-        if np.sqrt((x - self.x) ** 2 + (y - self.y) ** 2) < 10:
+        if np.sqrt((x - self.x) ** 2 + (y - self.y) ** 2) < 20:
             return True
         return False
 
