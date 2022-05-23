@@ -17,7 +17,7 @@ class WindMillPlayGame:
                 else:
                     object.a = PhotoImage(file="piece2.png")
                     object.change = True
-                    if object.count >= 10:
+                    if object.count >= 7:
                         object.window.bind('<Button-1>', object.seleccionandoFicha)
                 object.id = object.canvas.create_image(i.x, i.y, image=object.a)
                 i.ficha = object.id
@@ -25,7 +25,10 @@ class WindMillPlayGame:
                 object.lista.append([object.id, event.x, event.y])
                 object.a.name = object.a.name + "1"
                 object.count += 1
-                self.volada(i.ficha)
+
+                flagito = self.volada(i.ficha)
+                if flagito:
+                    object.window.bind('<Button-1>', object.quitada)
 
 
     def volada(self,flag):
@@ -55,6 +58,7 @@ class WindMillPlayGame:
                         if position_list[i.id + 7].ficha % 2 == 1 and position_list[i.id + 7].ficha != -1 and position_list[i.id-1].ficha % 2 == 1 and position_list[i.id + 15].ficha % 2 == 1 and position_list[i.id + 15].ficha != -1 and \
                                 (position_list[i.id + 7].ficha == flag or position_list[i.id + 15].ficha == flag or position_list[i.id-1].ficha == flag):
                             return True
+        return False
 
 
 

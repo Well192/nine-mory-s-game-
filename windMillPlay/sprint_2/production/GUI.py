@@ -1,5 +1,7 @@
 import tkinter
+
 from windMillPlay.sprint_2.production.Logic import *
+import numpy as np
 
 
 class WindMillPlay:
@@ -60,12 +62,17 @@ class WindMillPlay:
             posi2.ficha = self.id
             posi.empty = True
             posi2.empty = False
-            self.game.volada(self.id)
 
         else:
             print("Movimiento no válido")
 
         self.window.bind("<Button-1>", self.seleccionandoFicha)
+
+        if self.game.volada(self.id):
+            #print("QUITADA")
+            self.window.bind("<Button-1>", self.quitada)
+
+
 
     def validatePosition(self, x, y, ficha_x, ficha_y):
         # Recibe las coordenadas dónde se quiere mover y recibe las coordenadas de la ficha que quiere mover
@@ -91,9 +98,42 @@ class WindMillPlay:
         isValid = False
         return isValid
 
+
+    def quitada(self, e):
+
+        if not self.change:
+            print("==================QUITA FICHA NEGRA======================")
+            for i in self.lista:
+                if (np.sqrt((i[1] - e.x) ** 2 + (i[2] - e.y) ** 2) < 20) and i[0] % 2 != 0:
+                    self.position = i
+                    self.canvas.delete(self.position[0])
+                    self.lista.remove(self.position)
+                    self.canvas.delete(i[0])
+
+            for i in position_list:
+                if (i.in_the_radio(e.x, e.y)):
+                    i.empty = True
+        else:
+            print("=====================QUITA FICHA BLANCA=========================")
+            for i in self.lista:
+                if (np.sqrt((i[1] - e.x) ** 2 + (i[2] - e.y) ** 2) < 20) and i[0] % 2 == 0:
+                    self.position = i
+                    self.canvas.delete(self.position[0])
+                    self.lista.remove(self.position)
+                    self.canvas.delete(i[0])
+
+            for i in position_list:
+                if (i.in_the_radio(e.x, e.y)):
+                    i.empty = True
+
+        if self.count >= 8:
+            self.window.bind("<Button-1>", self.seleccionandoFicha)
+        else:
+            self.window.bind("<Button-1>", self.start)
+
+
     def mainloop(self):
         self.window.mainloop()
-
 
 milisInstance = WindMillPlay()
 milisInstance.mainloop()
