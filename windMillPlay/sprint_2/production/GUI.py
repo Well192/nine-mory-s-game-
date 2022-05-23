@@ -1,7 +1,5 @@
 import tkinter
-
 from windMillPlay.sprint_2.production.Logic import *
-import numpy as np
 
 
 class WindMillPlay:
@@ -16,8 +14,6 @@ class WindMillPlay:
         self.image_tablero = PhotoImage(file='tablero.png')
         self.tablero = self.canvas.create_image(0, 0, image=self.image_tablero, anchor=NW)
         self.lista = list()
-        self.image_turno = PhotoImage(file='turno_blanco.png')
-        self.turno = self.canvas.create_image(375, 375, image=self.image_turno)
         self.window.bind('<Button-1>', self.start)
         self.canvas.pack(expand=False)
 
