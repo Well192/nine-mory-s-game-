@@ -72,7 +72,7 @@ class WindMillPlay:
             #print("QUITADA")
             self.window.bind("<Button-1>", self.quitada)
 
-
+        print(self.lista)
 
     def validatePosition(self, x, y, ficha_x, ficha_y):
         # Recibe las coordenadas dónde se quiere mover y recibe las coordenadas de la ficha que quiere mover
@@ -113,6 +113,7 @@ class WindMillPlay:
             for i in position_list:
                 if (i.in_the_radio(e.x, e.y)):
                     i.empty = True
+                    i.ficha = -1
         else:
             print("=====================QUITA FICHA BLANCA=========================")
             for i in self.lista:
@@ -125,7 +126,8 @@ class WindMillPlay:
             for i in position_list:
                 if (i.in_the_radio(e.x, e.y)):
                     i.empty = True
-
+                    i.ficha = -1
+        print(self.lista)
         if self.count >= 8:
             self.window.bind("<Button-1>", self.seleccionandoFicha)
         else:
@@ -133,6 +135,7 @@ class WindMillPlay:
 
 
     def mainloop(self):
+
         self.window.mainloop()
 
 milisInstance = WindMillPlay()

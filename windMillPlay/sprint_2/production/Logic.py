@@ -8,6 +8,7 @@ class WindMillPlayGame:
         self.voladas = list()
 
     def posicionandoFicha(self, object, event):
+
         for i in position_list:
             if i.in_the_radio(event.x, event.y) and i.empty:
                 i.empty = False
@@ -29,7 +30,7 @@ class WindMillPlayGame:
                 flagito = self.volada(i.ficha)
                 if flagito:
                     object.window.bind('<Button-1>', object.quitada)
-
+        print(object.lista)
 
     def volada(self,flag):
         for i in position_list:
