@@ -137,11 +137,15 @@ class WindMillPlay:
             for i in self.lista:
                 if(i[0]%2==0):
                     if(self.chamberPar<3):
+
                         print("Ganó el negro")
+
                         break
                 else:
                     if(self.chamberImpar<3):
+
                         print("Ganó el blanco")
+
                         break
             self.window.bind("<Button-1>", self.seleccionandoFicha)
         else:
