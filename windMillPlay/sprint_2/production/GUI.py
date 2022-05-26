@@ -18,7 +18,8 @@ class WindMillPlay:
         self.lista = list()
         self.window.bind('<Button-1>', self.start)
         self.canvas.pack(expand=False)
-
+        self.chamberPar = 0
+        self.chamberImpar = 0
 
     def start(self, e):
         self.game = WindMillPlayGame()
@@ -49,9 +50,11 @@ class WindMillPlay:
             if self.change:
                 self.a = PhotoImage(file="piece.png")
                 self.change = False
+
             else:
                 self.a = PhotoImage(file="piece2.png")
                 self.change = True
+
 
             self.id = self.canvas.create_image(posi2.x, posi2.y, image=self.a)
             self.lista.append([self.id, e.x, e.y])
@@ -72,7 +75,7 @@ class WindMillPlay:
             #print("QUITADA")
             self.window.bind("<Button-1>", self.quitada)
 
-        print(self.lista)
+
 
     def validatePosition(self, x, y, ficha_x, ficha_y):
         # Recibe las coordenadas dónde se quiere mover y recibe las coordenadas de la ficha que quiere mover
@@ -109,6 +112,7 @@ class WindMillPlay:
                     self.canvas.delete(self.position[0])
                     self.lista.remove(self.position)
                     self.canvas.delete(i[0])
+                    self.chamberImpar -= 1
 
             for i in position_list:
                 if (i.in_the_radio(e.x, e.y)):
@@ -122,13 +126,23 @@ class WindMillPlay:
                     self.canvas.delete(self.position[0])
                     self.lista.remove(self.position)
                     self.canvas.delete(i[0])
+                    self.chamberPar -= 1
 
             for i in position_list:
                 if (i.in_the_radio(e.x, e.y)):
                     i.empty = True
                     i.ficha = -1
-        print(self.lista)
+
         if self.count >= 8:
+            for i in self.lista:
+                if(i[0]%2==0):
+                    if(self.chamberPar<3):
+                        print("Ganó el negro")
+                        break
+                else:
+                    if(self.chamberImpar<3):
+                        print("Ganó el blanco")
+                        break
             self.window.bind("<Button-1>", self.seleccionandoFicha)
         else:
             self.window.bind("<Button-1>", self.start)

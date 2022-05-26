@@ -15,9 +15,11 @@ class WindMillPlayGame:
                 if object.change:
                     object.a = PhotoImage(file="piece.png")
                     object.change = False
+                    object.chamberImpar += 1
                 else:
                     object.a = PhotoImage(file="piece2.png")
                     object.change = True
+                    object.chamberPar += 1
                     if object.count >= 7:
                         object.window.bind('<Button-1>', object.seleccionandoFicha)
                 object.id = object.canvas.create_image(i.x, i.y, image=object.a)
