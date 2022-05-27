@@ -23,7 +23,6 @@ class TestWindMillPlay(TestCase):
         #Insertamos posiciones cercanas a los vértices
         self.assertFalse(False,gameGUI.validatePosition(60,45,-45,-30))
 
-
 if __name__ == '__main__':
     unittest.main()
 

@@ -13,6 +13,5 @@ class TestPosition(unittest.TestCase):
         punto = [20, 20]  # fuera del radio permitido
         self.assertFalse(posicion.in_the_radio(punto[0], punto[1]))
 
-
 if __name__ == '__main__':
     unittest.main()

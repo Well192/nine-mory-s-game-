@@ -1,25 +1,23 @@
 from tkinter import *
 from windMillPlay.sprint_2.production.Data import *
 
-
 class WindMillPlayGame:
     def __init__(self):
         self.state = "Progreso"
         self.voladas = list()
 
     def posicionandoFicha(self, object, event):
-
         for i in position_list:
             if i.in_the_radio(event.x, event.y) and i.empty:
                 i.empty = False
                 if object.change:
                     object.a = PhotoImage(file="piece.png")
                     object.change = False
-                    object.chamberImpar += 1
+                    object.countImpar += 1
                 else:
                     object.a = PhotoImage(file="piece2.png")
                     object.change = True
-                    object.chamberPar += 1
+                    object.countPar += 1
                     if object.count >= 7:
                         object.window.bind('<Button-1>', object.seleccionandoFicha)
                 object.id = object.canvas.create_image(i.x, i.y, image=object.a)
@@ -30,17 +28,17 @@ class WindMillPlayGame:
                 object.count += 1
 
                 flagito = self.volada(i.ficha)
+
                 if flagito:
                     object.window.bind('<Button-1>', object.quitada)
-        print(object.lista)
+        #print(object.lista)
 
     def volada(self,flag):
         for i in position_list:
             if not i.empty:
                 if i.id % 2 == 1:
                     if i.id == 1 or i.id == 9 or i.id == 17:
-                        if position_list[i.id + 6].ficha % 2 == 0 and position_list[i.id + 5].ficha % 2 == 0 and position_list[i.id-1].ficha % 2 == 0 and \
-                                (position_list[i.id + 6].ficha == flag or position_list[i.id + 5].ficha == flag or position_list[i.id-1].ficha == flag):
+                        if position_list[i.id + 6].ficha % 2 == 0 and position_list[i.id + 5].ficha % 2 == 0 and position_list[i.id-1].ficha % 2 == 0 and (position_list[i.id + 6].ficha == flag or position_list[i.id + 5].ficha == flag or position_list[i.id-1].ficha == flag):
                             return True
                         if position_list[i.id + 6].ficha % 2 == 1 and position_list[i.id + 6].ficha != -1 and position_list[i.id-1].ficha % 2 == 1 and position_list[i.id + 5].ficha % 2 == 1 and position_list[i.id + 5].ficha != -1 and \
                                 (position_list[i.id + 6].ficha == flag or position_list[i.id + 5].ficha == flag or position_list[i.id-1].ficha == flag):
@@ -62,13 +60,3 @@ class WindMillPlayGame:
                                 (position_list[i.id + 7].ficha == flag or position_list[i.id + 15].ficha == flag or position_list[i.id-1].ficha == flag):
                             return True
         return False
-
-
-
-
-
-
-
-
-
-

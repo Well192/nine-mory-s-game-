@@ -3,7 +3,6 @@ import tkinter
 from windMillPlay.sprint_2.production.Logic import *
 import numpy as np
 
-
 class WindMillPlay:
     def __init__(self):
         self.window = Tk()
@@ -18,8 +17,8 @@ class WindMillPlay:
         self.lista = list()
         self.window.bind('<Button-1>', self.start)
         self.canvas.pack(expand=False)
-        self.chamberPar = 0
-        self.chamberImpar = 0
+        self.countPar = 0
+        self.countImpar = 0
 
     def start(self, e):
         self.game = WindMillPlayGame()
@@ -50,11 +49,9 @@ class WindMillPlay:
             if self.change:
                 self.a = PhotoImage(file="piece.png")
                 self.change = False
-
             else:
                 self.a = PhotoImage(file="piece2.png")
                 self.change = True
-
 
             self.id = self.canvas.create_image(posi2.x, posi2.y, image=self.a)
             self.lista.append([self.id, e.x, e.y])
@@ -74,7 +71,6 @@ class WindMillPlay:
         if self.game.volada(self.id):
             #print("QUITADA")
             self.window.bind("<Button-1>", self.quitada)
-
 
 
     def validatePosition(self, x, y, ficha_x, ficha_y):
@@ -101,32 +97,29 @@ class WindMillPlay:
         isValid = False
         return isValid
 
-
     def quitada(self, e):
 
         if not self.change:
-            print("==================QUITA FICHA NEGRA======================")
+            print("==================QUITA UNA FICHA NEGRA======================")
             for i in self.lista:
                 if (np.sqrt((i[1] - e.x) ** 2 + (i[2] - e.y) ** 2) < 20) and i[0] % 2 != 0:
-                    self.position = i
-                    self.canvas.delete(self.position[0])
-                    self.lista.remove(self.position)
                     self.canvas.delete(i[0])
-                    self.chamberImpar -= 1
+                    self.lista.remove(i)
+                    self.canvas.delete(i[0])
+                    self.countImpar -= 1
 
             for i in position_list:
                 if (i.in_the_radio(e.x, e.y)):
                     i.empty = True
                     i.ficha = -1
         else:
-            print("=====================QUITA FICHA BLANCA=========================")
+            print("=====================QUITA UNA FICHA BLANCA=========================")
             for i in self.lista:
                 if (np.sqrt((i[1] - e.x) ** 2 + (i[2] - e.y) ** 2) < 20) and i[0] % 2 == 0:
-                    self.position = i
-                    self.canvas.delete(self.position[0])
-                    self.lista.remove(self.position)
                     self.canvas.delete(i[0])
-                    self.chamberPar -= 1
+                    self.lista.remove(i)
+                    self.canvas.delete(i[0])
+                    self.countPar -= 1
 
             for i in position_list:
                 if (i.in_the_radio(e.x, e.y)):
@@ -136,21 +129,16 @@ class WindMillPlay:
         if self.count >= 8:
             for i in self.lista:
                 if(i[0]%2==0):
-                    if(self.chamberPar<3):
-
+                    if(self.countPar<3):
                         print("Ganó el negro")
-
                         break
                 else:
-                    if(self.chamberImpar<3):
-
+                    if(self.countImpar<3):
                         print("Ganó el blanco")
-
                         break
             self.window.bind("<Button-1>", self.seleccionandoFicha)
         else:
             self.window.bind("<Button-1>", self.start)
-
 
     def mainloop(self):
 

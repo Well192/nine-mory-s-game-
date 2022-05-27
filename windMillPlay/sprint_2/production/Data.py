@@ -1,6 +1,5 @@
 import numpy as np
 
-
 class Position:
     def __init__(self, x, y, id):
         self.empty = True
@@ -13,17 +12,6 @@ class Position:
         if np.sqrt((x - self.x) ** 2 + (y - self.y) ** 2) < 20:
             return True
         return False
-
-    def set_coor(self, x, y):
-        self.x = x
-        self.y = y
-
-    def get_coor(self):
-        return self.x, self.y
-
-    def get_id(self, x, y):
-        if self.in_the_radio(x, y):
-            return self.id
 
     def allowed_positions(self):
         if self.id == 1:
@@ -74,7 +62,6 @@ class Position:
             return [22, 24]
         if self.id == 24:
             return [16, 17, 23]
-
 
 position_list = list()
 # Primer Cuadrado
