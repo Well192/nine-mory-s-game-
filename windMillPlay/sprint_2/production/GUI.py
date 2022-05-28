@@ -1,4 +1,5 @@
 import tkinter
+from encodings import undefined
 
 from windMillPlay.sprint_2.production.Logic import *
 import numpy as np
@@ -67,9 +68,7 @@ class WindMillPlay:
             print("Movimiento no válido")
 
         self.window.bind("<Button-1>", self.seleccionandoFicha)
-
         if self.game.volada(self.id):
-            #print("QUITADA")
             self.window.bind("<Button-1>", self.quitada)
 
 
@@ -87,8 +86,9 @@ class WindMillPlay:
 
         adyacentes = posicion_ficha.allowed_positions()
 
-        while posicion2 == None:
-            print("movimiento invalido")
+        if posicion2 == None:
+            isValid = False
+            return isValid
 
         for k in adyacentes:
             if k == posicion2.id and isValid:
@@ -98,7 +98,6 @@ class WindMillPlay:
         return isValid
 
     def quitada(self, e):
-
         if not self.change:
             print("==================QUITA UNA FICHA NEGRA======================")
             for i in self.lista:
@@ -126,7 +125,7 @@ class WindMillPlay:
                     i.empty = True
                     i.ficha = -1
 
-        if self.count >= 8:
+        if self.count >= 10:
             for i in self.lista:
                 if(i[0]%2==0):
                     if(self.countPar<3):
@@ -141,7 +140,6 @@ class WindMillPlay:
             self.window.bind("<Button-1>", self.start)
 
     def mainloop(self):
-
         self.window.mainloop()
 
 milisInstance = WindMillPlay()
