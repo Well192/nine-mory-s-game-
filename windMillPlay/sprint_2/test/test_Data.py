@@ -1,5 +1,5 @@
 import unittest
-from windMillPlay.sprint_1.production.Data import Position
+from windMillPlay.sprint_2.production.Data import Position
 
 
 class TestPosition(unittest.TestCase):

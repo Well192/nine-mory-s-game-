@@ -76,15 +76,21 @@ class WindMillPlay:
         # Recibe las coordenadas dónde se quiere mover y recibe las coordenadas de la ficha que quiere mover
         global posicion_ficha, posicion2
         isValid = False
+        isDefined = False
         # Verificar si  el lugar dónde quiero ubicar la ficha es un intersección
         for i in position_list:
             if i.in_the_radio(ficha_x, ficha_y):
                 posicion_ficha = i
+                isDefined = True
             if i.in_the_radio(x, y) and i.empty:
                 posicion2 = i
                 isValid = True
 
+        if isDefined == False:
+            return isValid
+
         adyacentes = posicion_ficha.allowed_positions()
+
 
         if posicion2 == None:
             isValid = False
