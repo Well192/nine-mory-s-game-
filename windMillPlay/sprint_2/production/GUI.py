@@ -1,8 +1,6 @@
-import tkinter
-from encodings import undefined
-
 from windMillPlay.sprint_2.production.Logic import *
 import numpy as np
+
 
 class WindMillPlay:
     def __init__(self):
@@ -13,7 +11,7 @@ class WindMillPlay:
         self.state = True
         self.change = True
         self.count = 0
-        self.image_tablero = PhotoImage(file='tablero.png')
+        self.image_tablero = PhotoImage(file="tablero.png")
         self.tablero = self.canvas.create_image(0, 0, image=self.image_tablero, anchor=NW)
         self.lista = list()
         self.window.bind('<Button-1>', self.start)
@@ -69,8 +67,8 @@ class WindMillPlay:
 
         self.window.bind("<Button-1>", self.seleccionandoFicha)
         if self.game.volada(self.id):
+            print("volada")
             self.window.bind("<Button-1>", self.quitada)
-
 
     def validatePosition(self, x, y, ficha_x, ficha_y):
         # Recibe las coordenadas dónde se quiere mover y recibe las coordenadas de la ficha que quiere mover
@@ -131,14 +129,14 @@ class WindMillPlay:
                     i.empty = True
                     i.ficha = -1
 
-        if self.count >= 10:
+        if self.count >= 16:
             for i in self.lista:
-                if(i[0]%2==0):
-                    if(self.countPar<3):
+                if (i[0] % 2 == 0):
+                    if (self.countPar < 3):
                         print("Ganó el negro")
                         break
                 else:
-                    if(self.countImpar<3):
+                    if (self.countImpar < 3):
                         print("Ganó el blanco")
                         break
             self.window.bind("<Button-1>", self.seleccionandoFicha)
@@ -147,6 +145,7 @@ class WindMillPlay:
 
     def mainloop(self):
         self.window.mainloop()
+
 
 milisInstance = WindMillPlay()
 milisInstance.mainloop()
