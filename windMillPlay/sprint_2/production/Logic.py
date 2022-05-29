@@ -30,7 +30,6 @@ class WindMillPlayGame:
                 flagito = self.volada(i.ficha)
 
                 if flagito:
-                    print("volada")
                     object.window.bind('<Button-1>', object.quitada)
         #print(object.lista)
 

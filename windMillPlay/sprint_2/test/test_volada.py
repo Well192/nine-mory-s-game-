@@ -6,5 +6,6 @@ from windMillPlay.sprint_2.production.Data import *
 class TestWindMillPlayGame(TestCase):
     def test_volada(self):
         game =  WindMillPlayGame()
+        position_list[]
         game.volada()
 
