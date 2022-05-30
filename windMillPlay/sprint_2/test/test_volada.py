@@ -40,6 +40,41 @@ class TestWindMillPlayGame(TestCase):
         position_list[23].empty = False
         self.assertEqual(True, game.volada(5))
 
+    def test_volada_case2(self):
+        game =  WindMillPlayGame()
+
+        position_list[0].ficha = 2
+        position_list[0].empty = False
+        position_list[6].ficha = 4
+        position_list[6].empty = False
+        position_list[7].ficha = 6
+        position_list[7].empty = False
+        self.assertEqual(True, game.volada(4))
+
+    def test_volada_case2_2(self):
+
+        game =  WindMillPlayGame()
+
+        position_list[8].ficha = 2
+        position_list[8].empty = False
+        position_list[14].ficha = 4
+        position_list[14].empty = False
+        position_list[15].ficha = 6
+        position_list[15].empty = False
+        self.assertEqual(True, game.volada(2))
+
+    def test_volada_case2_3(self):
+
+        game =  WindMillPlayGame()
+
+        position_list[16].ficha = 2
+        position_list[16].empty = False
+        position_list[22].ficha = 4
+        position_list[22].empty = False
+        position_list[23].ficha = 6
+        position_list[23].empty = False
+        self.assertEqual(True, game.volada(6))
+
     def test_volada_case5(self):
         game =  WindMillPlayGame()
 
